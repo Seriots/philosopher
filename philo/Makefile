@@ -12,6 +12,9 @@ SRC_NAMES	= philosopher \
 				phi_parsing_setter \
 				phi_parsing_checker \
 				phi_parsing \
+				phi_free \
+				phi_init_philo \
+				phi_init_table \
 
 
 HEADER_DIR	= include

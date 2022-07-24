@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   phi_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 17:03:59 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/24 20:34:19 by lgiband          ###   ########.fr       */
+/*   Created: 2022/07/24 20:09:07 by lgiband           #+#    #+#             */
+/*   Updated: 2022/07/24 20:30:51 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include <stdlib.h>
+#include <pthread.h>
 
-# include "philosopher.h"
+#include "philosopher.h"
 
-/*phi_parsing_setter.c*/
-int	set_phi_const(int argc, char **argv, t_const *phi_const);
+void	free_forks(t_table *table)
+{
+	int	i;
 
-/*phi_parsing_checker.c*/
-int	check_arguments(int argc, char **argv);
+	i = -1;
+	while (++i < table->phi_const.nb_philo)
+		pthread_mutex_destroy(&table->all_fork[i]);
+	free(table->all_fork);
+}
 
-/*phi_parsing.c*/
-int	parsing(int argc, char **argv, t_const *phi_const);
-
-#endif
+void	free_table(t_table *table)
+{
+	free_forks(table);
+	pthread_mutex_destroy(&table->end.mut);
+	pthread_mutex_destroy(&table->log);
+	free(table->all_philo);
+}

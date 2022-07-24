@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:04:56 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/24 18:13:17 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/24 19:26:13 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ void	phi_display_error(int key)
 		write(2, "A minimum of one philosophers is needed\n", 41);
 	else if (key == 6)
 		write(2, "Arguments overflow\n", 20);
+	else if (key == 7)
+		write(2, "Malloc error\n", 14);
 }
