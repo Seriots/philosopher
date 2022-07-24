@@ -3,12 +3,14 @@ CFLAGS		= -Wall -Werror -Wextra -g -pthread
 MAKE		= /bin/make
 
 
-NAME		= philosopher
+NAME		= philo
 
 HEADER		= philosopher.h \
 
 SRC_NAMES	= philosopher \
 				phi_error \
+				phi_parsing_setter \
+				phi_parsing_checker \
 				phi_parsing \
 
 

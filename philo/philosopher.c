@@ -6,14 +6,16 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:44:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/24 17:08:26 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/24 18:13:34 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 #include "parsing.h"
 
-int main(int argc, char **argv)
+#include <stdio.h>
+
+int	main(int argc, char **argv)
 {
 	t_table	table;
 	int		error;
