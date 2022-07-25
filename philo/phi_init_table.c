@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:52:00 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/24 20:32:51 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/25 18:53:36 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,24 @@ static int	init_all_fork(t_table *table, int nb_philo)
 	return (0);
 }
 
-int	init_table(t_table *table)
+int	init_table(t_table *table, int nb_philo)
 {
 	int	error;
 
-	error = init_all_fork(table, table->phi_const.nb_philo);
+	error = init_all_fork(table, nb_philo);
 	if (error)
 		return (error);
-	error = set_all_philo(table, table->phi_const.nb_philo);
+	error = set_all_philo(table, nb_philo);
 	if (error)
 		return (free_forks(table), error);
+	table->all_thread = malloc(sizeof(pthread_t) * (nb_philo + 1));
+	if (!table->all_thread)
+		return (free_forks(table), free(table->all_philo), 7);
+	memset(table->all_thread, 0, sizeof(pthread_t) * (nb_philo + 1));
 	pthread_mutex_init(&table->log, 0);
 	pthread_mutex_init(&table->end.mut, 0);
 	table->end.end = 0;
+	pthread_mutex_init(&table->end_thread.mut, 0);
+	table->end_thread.end = 0;
 	return (0);
 }

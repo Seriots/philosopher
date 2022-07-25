@@ -8,13 +8,18 @@ NAME		= philo
 HEADER		= philosopher.h \
 
 SRC_NAMES	= philosopher \
+				phi_create_thread \
 				phi_error \
-				phi_parsing_setter \
-				phi_parsing_checker \
-				phi_parsing \
 				phi_free \
 				phi_init_philo \
 				phi_init_table \
+				phi_parsing_checker \
+				phi_parsing_setter \
+				phi_parsing \
+				phi_routine_action \
+				phi_routine_loop_cond \
+				phi_routine \
+				phi_utils
 
 
 HEADER_DIR	= include

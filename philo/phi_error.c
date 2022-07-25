@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:04:56 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/24 19:26:13 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/25 18:15:39 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void	phi_display_error(int key)
 		write(2, "Arguments overflow\n", 20);
 	else if (key == 7)
 		write(2, "Malloc error\n", 14);
+	else if (key == 8)
+		write(2, "Thread error\n", 14);
 }
