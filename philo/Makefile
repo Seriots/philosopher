@@ -2,7 +2,6 @@ CC			= cc
 CFLAGS		= -Wall -Werror -Wextra -g -pthread
 MAKE		= /bin/make
 
-
 NAME		= philo
 
 HEADER		= philosopher.h \
@@ -21,9 +20,6 @@ SRC_NAMES	= philosopher \
 				phi_routine \
 				phi_utils
 
-
-HEADER_DIR	= include
-SRC_DIR		= src
 OBJ_DIR		= obj
 
 OBJ			= $(SRC_NAMES:%=$(OBJ_DIR)/%.o)

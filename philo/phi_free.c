@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 20:09:07 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/25 22:26:25 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/26 19:56:07 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 #include "philosopher.h"
 
+/*	pthread_mutex_destroy(&table->all_fork[i]);
+while (++i < table->phi_const.nb_philo)
+*/
+
 void	free_forks(t_table *table)
 {
 	int	i;
 
 	i = -1;
-	//while (++i < table->phi_const.nb_philo)
-	//	pthread_mutex_destroy(&table->all_fork[i]);
 	free(table->all_fork);
 }
 
