@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:44:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 19:58:20 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/26 20:45:38 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ static int	main_end_cond(t_table *table)
 static void	check_death(t_table *table, int td, int nb_philo)
 {
 	int		i;
-	long	start;
 	int		breaker;
 
 	i = -1;
-	start = table->all_philo[0].start;
 	pthread_mutex_lock(&(table->end.mut));
 	breaker = table->end.end;
 	pthread_mutex_unlock(&(table->end.mut));
@@ -43,10 +41,10 @@ static void	check_death(t_table *table, int td, int nb_philo)
 	while (++i < nb_philo)
 	{
 		pthread_mutex_lock(&(table->all_philo[i].last_meal_mut));
-		if (timestamp(start) - table->all_philo[i].last_meal >= (long)td)
+		if (timestamp(table->start) - table->all_philo[i].last_meal >= (long)td)
 		{
 			log_print(&(table->all_philo[i]),
-				table->all_philo[i].phi_number, start, "died");
+				table->all_philo[i].phi_number, table->start, "died");
 			breaker = 1;
 		}
 		pthread_mutex_unlock(&(table->all_philo[i].last_meal_mut));

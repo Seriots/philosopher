@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:52:00 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/25 18:53:36 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/26 20:46:36 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	set_all_philo(t_table *table, int nb_philo)
 	memset(table->all_philo, 0, sizeof(t_philo) * (nb_philo + 1));
 	gettimeofday(&start, 0);
 	start_value = start.tv_sec * 1000 + start.tv_usec / 1000;
+	table->start = start_value;
 	while (i < nb_philo)
 	{
 		init_philo(table, &table->all_philo[i], start_value, i);
@@ -73,5 +74,6 @@ int	init_table(t_table *table, int nb_philo)
 	table->end.end = 0;
 	pthread_mutex_init(&table->end_thread.mut, 0);
 	table->end_thread.end = 0;
+	pthread_mutex_init(&table->setup, 0);
 	return (0);
 }

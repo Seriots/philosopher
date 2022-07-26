@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:45:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 19:57:17 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/26 23:43:24 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo
 	long			last_meal;
 	int				phi_number;
 	int				nb_of_meal;
+	pthread_mutex_t	*setup;
 	long			start;
 }					t_philo;
 
@@ -53,9 +54,11 @@ typedef struct s_table
 	t_end			end;
 	t_end			end_thread;
 	pthread_mutex_t	log;
+	pthread_mutex_t	setup;
 	pthread_mutex_t	*all_fork;
 	t_philo			*all_philo;
 	pthread_t		*all_thread;
+	long			start;
 }					t_table;
 
 /*phi_error.c*/
@@ -89,8 +92,16 @@ void	grab_left_fork(t_philo *philo);
 
 /*phi_utils.c*/
 void	msleep(unsigned long time);
-void	log_print(t_philo *philo, int phi_num, long start, char *message);
-void	log_print_main(t_table *table, int phi_num, long start, char *message);
 long	timestamp(long start);
 
+/*phi_print_utils.c*/
+void	phi_putnbr_long(long nbr);
+void	phi_putnbr_int(int nbr);
+void	phi_putchar(char c);
+void	phi_putstr(char *s);
+int		phi_strlen(char *s);
+
+/*phi_print.c*/
+void	log_print(t_philo *philo, int phi_num, long start, char *message);
+void	log_print_main(t_table *table, int phi_num, long start, char *message);
 #endif

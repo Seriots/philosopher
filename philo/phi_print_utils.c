@@ -1,36 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_utils.c                                        :+:      :+:    :+:   */
+/*   phi_print_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 18:31:08 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 23:02:16 by lgiband          ###   ########.fr       */
+/*   Created: 2022/07/26 23:03:20 by lgiband           #+#    #+#             */
+/*   Updated: 2022/07/26 23:30:39 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
-
-#include <pthread.h>
-#include <stdio.h>
-#include <sys/time.h>
 #include <unistd.h>
 
-void	msleep(unsigned long time)
+#include "philosopher.h"
+
+void	phi_putnbr_long(long nbr)
 {
-	time = time * 1000;
-	usleep((__useconds_t)time);
+	if (nbr >= 10)
+		phi_putnbr_long(nbr / 10);
+	phi_putchar((nbr % 10) + 48);
 }
 
-long	timestamp(long start)
+void	phi_putnbr_int(int nbr)
 {
-	struct timeval	time;
-	long			time_value;
+	if (nbr >= 10)
+		phi_putnbr_long(nbr / 10);
+	phi_putchar((nbr % 10) + 48);
+		
+}
 
-	if (start == -1)
-		return (0);
-	gettimeofday(&time, 0);
-	time_value = time.tv_sec * 1000 + time.tv_usec / 1000;
-	return (time_value - start);
+void	phi_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+int	phi_strlen(char *s)
+{
+	int i;
+	
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
+void	phi_putstr(char *s)
+{
+	write(1, s, phi_strlen(s));
 }

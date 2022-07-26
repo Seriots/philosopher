@@ -5,6 +5,7 @@ MAKE		= /bin/make
 NAME		= philo
 
 HEADER		= philosopher.h \
+				parsing.h
 
 SRC_NAMES	= philosopher \
 				phi_create_thread \
@@ -15,6 +16,8 @@ SRC_NAMES	= philosopher \
 				phi_parsing_checker \
 				phi_parsing_setter \
 				phi_parsing \
+				phi_print \
+				phi_print_utils \
 				phi_routine_action \
 				phi_routine_loop_cond \
 				phi_routine \
@@ -49,11 +52,11 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-$(NAME): $(LIB_FILES) $(OBJ) $(HEADER)
+$(NAME): $(HEADER) $(OBJ) 
 	@echo "\n$(_BLUE)Linkage $(NAME)$(_NO_COLOR)"
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)/%.o:%.c
+$(OBJ_DIR)/%.o:%.c $(HEADER)
 
 	@if [ ! -d $(dir $@) ]; then \
 		echo "\n$(_CYAN)Create $(dir $@)$(_NO_COLOR)"; \
