@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 19:48:22 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/27 21:59:34 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 01:20:20 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_philo(t_table *table, t_philo *philo, long start, int i)
 	philo->setup = &(table->setup);
 	philo->nb_of_meal = 0;
 	philo->phi_number = i + 1;
+	philo->quota = 0;
 	philo->last_meal = 0;
 	pthread_mutex_init(&(philo->last_meal_mut), 0);
 	philo->start = start;

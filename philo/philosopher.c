@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:44:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 01:00:45 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 01:21:59 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ static int	main_end_cond(t_table *table)
 	pthread_mutex_lock(&table->end_thread.mut);
 	if (table->end_thread.end == table->phi_const.nb_philo
 		|| table->end.end == 1)
+	{
+		table->end.end = 1;
 		return (pthread_mutex_unlock(&(table->end_thread.mut)),
 			pthread_mutex_unlock(&(table->end.mut)), 0);
+	}
 	return (pthread_mutex_unlock(&(table->end_thread.mut)),
 		pthread_mutex_unlock(&(table->end.mut)), 1);
 }

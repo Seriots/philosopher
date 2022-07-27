@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:45:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 00:28:43 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 01:20:10 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo
 	pthread_mutex_t	last_meal_mut;
 	long			last_meal;
 	int				phi_number;
+	int				quota;
 	int				nb_of_meal;
 	pthread_mutex_t	*setup;
 	long			start;

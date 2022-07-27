@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:28:30 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 00:58:13 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 01:17:04 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ void	*end_routine(t_philo *philo)
 		pthread_mutex_unlock(philo->r_fork);
 		philo->take_r_fork = 0;
 	}
-	pthread_mutex_lock(&(philo->end_thread->mut));
-	philo->end_thread->end += 1;
-	pthread_mutex_unlock(&(philo->end_thread->mut));
 	return (0);
 }
 
@@ -74,7 +71,8 @@ void	*routine_solo(void *args)
 	philo = (t_philo *)args;
 	wait_start(philo);
 	log_print(philo, philo->phi_number, philo->start, "is thinking");
-	grab_left_fork(philo);
+	if (run_loop(philo))
+		grab_left_fork(philo);
 	while (run_loop(philo))
 		usleep(200);
 	return (end_routine(philo));

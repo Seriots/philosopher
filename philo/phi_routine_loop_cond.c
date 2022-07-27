@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:57:31 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 19:55:38 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 01:22:44 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ int	run_loop(t_philo *philo)
 	pthread_mutex_unlock(&(philo->end->mut));
 	if (philo->phi_const->nb_repeat == -1)
 		return (1);
-	if (philo->nb_of_meal >= philo->phi_const->nb_repeat)
-		return (0);
+	if (philo->nb_of_meal >= philo->phi_const->nb_repeat && philo->quota == 0)
+	{
+		pthread_mutex_lock(&(philo->end_thread->mut));
+		philo->end_thread->end += 1;
+		pthread_mutex_unlock(&(philo->end_thread->mut));
+		philo->quota = 1;
+	}
 	return (1);
 }
