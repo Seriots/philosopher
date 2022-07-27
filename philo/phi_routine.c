@@ -6,11 +6,13 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:28:30 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 20:45:53 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 00:58:13 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+#include <unistd.h>
 
 void	*end_routine(t_philo *philo)
 {
@@ -30,19 +32,27 @@ void	*end_routine(t_philo *philo)
 	return (0);
 }
 
+void	wait_start(t_philo *philo)
+{
+	while (timestamp(philo->start) < START_LINE)
+		usleep(300);
+	philo->start += START_LINE;
+}
+
 void	*routine(void *args)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)args;
+	wait_start(philo);
 	log_print(philo, philo->phi_number, philo->start, "is thinking");
 	if (philo->phi_number % 2 == 1)
-		msleep(philo->phi_const->time_to_eat);
+		msleep(philo->phi_const->time_to_eat, timestamp(0));
 	while (run_loop(philo))
 	{
 		if (philo->phi_number % 2 == 1
 			&& philo->phi_number == philo->phi_const->nb_philo)
-			msleep(philo->phi_const->time_to_eat / 2);
+			msleep(philo->phi_const->time_to_eat / 2, timestamp(0));
 		if (run_loop(philo))
 			grab_left_fork(philo);
 		if (run_loop(philo))
@@ -54,5 +64,18 @@ void	*routine(void *args)
 		if (run_loop(philo))
 			log_print(philo, philo->phi_number, philo->start, "is thinking");
 	}
+	return (end_routine(philo));
+}
+
+void	*routine_solo(void *args)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)args;
+	wait_start(philo);
+	log_print(philo, philo->phi_number, philo->start, "is thinking");
+	grab_left_fork(philo);
+	while (run_loop(philo))
+		usleep(200);
 	return (end_routine(philo));
 }

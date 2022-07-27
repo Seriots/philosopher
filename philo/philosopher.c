@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:44:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 20:45:38 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 01:00:45 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,35 @@
 #include "parsing.h"
 
 #include <stdio.h>
+#include <unistd.h>
 
 static int	main_end_cond(t_table *table)
 {
-	pthread_mutex_lock(&table->end_thread.mut);
 	pthread_mutex_lock(&(table->end.mut));
+	pthread_mutex_lock(&table->end_thread.mut);
 	if (table->end_thread.end == table->phi_const.nb_philo
 		|| table->end.end == 1)
 		return (pthread_mutex_unlock(&(table->end_thread.mut)),
 			pthread_mutex_unlock(&(table->end.mut)), 0);
 	return (pthread_mutex_unlock(&(table->end_thread.mut)),
 		pthread_mutex_unlock(&(table->end.mut)), 1);
+}
+
+static void	check_last_meal(t_table *table, int *breaker, int i, int td)
+{
+	pthread_mutex_lock(&(table->all_philo[i].last_meal_mut));
+	if (timestamp(table->start) - table->all_philo[i].last_meal >= (long)td)
+	{
+		pthread_mutex_lock(&(table->end.mut));
+		table->end.end = 1;
+		pthread_mutex_unlock(&(table->end.mut));
+		pthread_mutex_lock(&table->log);
+		printf("%li %d %s\n", timestamp(table->start),
+			table->all_philo[i].phi_number, "died");
+		pthread_mutex_unlock(&table->log);
+		*breaker = 1;
+	}
+	pthread_mutex_unlock(&(table->all_philo[i].last_meal_mut));
 }
 
 static void	check_death(t_table *table, int td, int nb_philo)
@@ -40,18 +58,11 @@ static void	check_death(t_table *table, int td, int nb_philo)
 		return ;
 	while (++i < nb_philo)
 	{
-		pthread_mutex_lock(&(table->all_philo[i].last_meal_mut));
-		if (timestamp(table->start) - table->all_philo[i].last_meal >= (long)td)
-		{
-			log_print(&(table->all_philo[i]),
-				table->all_philo[i].phi_number, table->start, "died");
-			breaker = 1;
-		}
-		pthread_mutex_unlock(&(table->all_philo[i].last_meal_mut));
+		check_last_meal(table, &breaker, i, td);
 		if (breaker)
 			break ;
 	}
-	msleep(1);
+	msleep(1, timestamp(0));
 }
 
 static int	wait_all_thread(t_table *table)
@@ -87,6 +98,9 @@ int	main(int argc, char **argv)
 			table.all_philo, table.phi_const.nb_philo);
 	if (error)
 		return (phi_display_error(error), free_table(&table), 1);
+	while (timestamp(table.start) < START_LINE)
+		usleep(300);
+	table.start += START_LINE;
 	while (main_end_cond(&table))
 		check_death(&table, table.phi_const.time_to_die,
 			table.phi_const.nb_philo);

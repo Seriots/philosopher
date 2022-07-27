@@ -17,7 +17,6 @@ SRC_NAMES	= philosopher \
 				phi_parsing_setter \
 				phi_parsing \
 				phi_print \
-				phi_print_utils \
 				phi_routine_action \
 				phi_routine_loop_cond \
 				phi_routine \

@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:05:55 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 20:17:28 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 00:29:05 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static pthread_t	create_thread(t_philo *philo)
 	int			error;
 
 	phi_thread = 0;
-	error = pthread_create(&phi_thread, 0, routine, philo);
+	if (philo->phi_const->nb_philo == 1)
+		error = pthread_create(&phi_thread, 0, routine_solo, philo);
+	else
+		error = pthread_create(&phi_thread, 0, routine, philo);
 	if (error)
 		return (0);
 	return (phi_thread);

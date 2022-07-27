@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:45:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 23:43:24 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 00:28:43 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PHILOSOPHER_H
 
 # include <pthread.h>
+
+# define START_LINE 30
 
 typedef struct s_const
 {
@@ -79,6 +81,7 @@ int		create_all_thread(pthread_t	*all_thread,
 			t_philo *all_philo, int nb_philo);
 
 /*phi_routine.c*/
+void	*routine_solo(void *args);
 void	*routine(void *args);
 
 /*phi_routine_loop_cond.c*/
@@ -91,17 +94,16 @@ void	grab_right_fork(t_philo *philo);
 void	grab_left_fork(t_philo *philo);
 
 /*phi_utils.c*/
-void	msleep(unsigned long time);
+void	msleep(long time, long start);
 long	timestamp(long start);
 
 /*phi_print_utils.c*/
-void	phi_putnbr_long(long nbr);
-void	phi_putnbr_int(int nbr);
-void	phi_putchar(char c);
-void	phi_putstr(char *s);
-int		phi_strlen(char *s);
+size_t	phi_strlen(char *s);
+int		phi_nbrlen(size_t nbr);
+void	phi_putnbr(char *result, size_t *pos, size_t nbr);
+void	phi_putstr(char *result, size_t *pos, char *message);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 /*phi_print.c*/
 void	log_print(t_philo *philo, int phi_num, long start, char *message);
-void	log_print_main(t_table *table, int phi_num, long start, char *message);
 #endif
