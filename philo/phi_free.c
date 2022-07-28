@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 20:09:07 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/26 19:56:07 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 19:23:45 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	free_forks(t_table *table)
 	int	i;
 
 	i = -1;
+	while (++i < table->phi_const.nb_philo)
+		pthread_mutex_destroy(&table->all_fork[i]);
 	free(table->all_fork);
 }
 
@@ -41,6 +43,8 @@ void	free_table(t_table *table)
 {
 	free_forks(table);
 	pthread_mutex_destroy(&table->end.mut);
+	pthread_mutex_destroy(&table->end_thread.mut);
+	pthread_mutex_destroy(&table->setup);
 	pthread_mutex_destroy(&table->log);
 	free_philo(table->all_philo);
 	free(table->all_thread);

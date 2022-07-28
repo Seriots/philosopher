@@ -6,11 +6,13 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:04:56 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/25 18:15:39 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 19:51:06 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+
+#include "philosopher.h"
 
 static void	phi_display_parsing_error(int key)
 {
@@ -39,4 +41,13 @@ void	phi_display_error(int key)
 		write(2, "Malloc error\n", 14);
 	else if (key == 8)
 		write(2, "Thread error\n", 14);
+}
+
+int	thread_creation_error(t_table *table, int error)
+{
+	pthread_mutex_lock(&(table->end.mut));
+	table->end.end = 1;
+	pthread_mutex_unlock(&(table->end.mut));
+	wait_all_thread(table);
+	return (phi_display_error(error), free_table(table), 1);
 }

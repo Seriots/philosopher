@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:45:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 01:20:10 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 19:52:22 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ typedef struct s_table
 	long			start;
 }					t_table;
 
+/*main.c*/
+int		wait_all_thread(t_table *table);
+
 /*phi_error.c*/
+int		thread_creation_error(t_table *table, int error);
 void	phi_display_error(int key);
 
 /*phi_init_philo.c*/
@@ -97,13 +101,6 @@ void	grab_left_fork(t_philo *philo);
 /*phi_utils.c*/
 void	msleep(long time, long start);
 long	timestamp(long start);
-
-/*phi_print_utils.c*/
-size_t	phi_strlen(char *s);
-int		phi_nbrlen(size_t nbr);
-void	phi_putnbr(char *result, size_t *pos, size_t nbr);
-void	phi_putstr(char *result, size_t *pos, char *message);
-void	*ft_calloc(size_t nmemb, size_t size);
 
 /*phi_print.c*/
 void	log_print(t_philo *philo, int phi_num, long start, char *message);

@@ -7,7 +7,7 @@ NAME		= philo
 HEADER		= philosopher.h \
 				parsing.h
 
-SRC_NAMES	= philosopher \
+SRC_NAMES	= main \
 				phi_create_thread \
 				phi_error \
 				phi_free \

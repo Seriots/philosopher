@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:44:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 01:21:59 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 19:55:35 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	main_end_cond(t_table *table)
 	pthread_mutex_lock(&(table->end.mut));
 	pthread_mutex_lock(&table->end_thread.mut);
 	if (table->end_thread.end == table->phi_const.nb_philo
-		|| table->end.end == 1)
+		|| table->end.end == 1 || table->phi_const.nb_repeat == 0)
 	{
 		table->end.end = 1;
 		return (pthread_mutex_unlock(&(table->end_thread.mut)),
@@ -68,7 +68,7 @@ static void	check_death(t_table *table, int td, int nb_philo)
 	msleep(1, timestamp(0));
 }
 
-static int	wait_all_thread(t_table *table)
+int	wait_all_thread(t_table *table)
 {
 	int	i;
 	int	error;
@@ -76,7 +76,7 @@ static int	wait_all_thread(t_table *table)
 
 	i = 0;
 	ret_val = 0;
-	while (i < table->phi_const.nb_philo)
+	while (i < table->phi_const.nb_philo && table->all_thread[i])
 	{
 		error = pthread_join(table->all_thread[i], 0);
 		if (error && ret_val == 0)
@@ -100,7 +100,7 @@ int	main(int argc, char **argv)
 	error = create_all_thread(table.all_thread,
 			table.all_philo, table.phi_const.nb_philo);
 	if (error)
-		return (phi_display_error(error), free_table(&table), 1);
+		return (thread_creation_error(&table, error));
 	while (timestamp(table.start) < START_LINE)
 		usleep(300);
 	table.start += START_LINE;

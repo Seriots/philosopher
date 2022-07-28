@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:28:30 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 01:17:04 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 19:56:04 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	*routine(void *args)
 
 	philo = (t_philo *)args;
 	wait_start(philo);
-	log_print(philo, philo->phi_number, philo->start, "is thinking");
+	if (run_loop(philo))
+		log_print(philo, philo->phi_number, philo->start, "is thinking");
 	if (philo->phi_number % 2 == 1)
 		msleep(philo->phi_const->time_to_eat, timestamp(0));
 	while (run_loop(philo))
