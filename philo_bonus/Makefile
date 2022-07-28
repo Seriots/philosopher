@@ -1,26 +1,25 @@
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra -pthread
+CFLAGS		= -Wall -Werror -Wextra -g -pthread
 MAKE		= /bin/make
 
-NAME		= philo
+NAME		= philo_bonus
 
-HEADER		= philosopher.h \
-				parsing.h
+HEADER		= philosopher_bonus.h \
+				parsing_bonus.h
 
-SRC_NAMES	= main \
-				phi_create_thread \
-				phi_error \
-				phi_free \
-				phi_init_philo \
-				phi_init_table \
-				phi_parsing_checker \
-				phi_parsing_setter \
-				phi_parsing \
-				phi_print \
-				phi_routine_action \
-				phi_routine_loop_cond \
-				phi_routine \
-				phi_utils
+SRC_NAMES	= main_bonus \
+				phi_create_thread_bonus \
+				phi_error_bonus \
+				phi_free_bonus \
+				phi_init_philo_bonus \
+				phi_init_table_bonus \
+				phi_parsing_checker_bonus \
+				phi_parsing_setter_bonus \
+				phi_parsing_bonus\
+				phi_print_bonus \
+				phi_routine_bonus \
+				phi_utils_bonus
+
 
 OBJ_DIR		= obj
 

@@ -6,14 +6,13 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:44:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 19:55:35 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/28 20:25:39 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 #include "parsing.h"
 
-#include <stdio.h>
 #include <unistd.h>
 
 static int	main_end_cond(t_table *table)
