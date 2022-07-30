@@ -17,7 +17,9 @@ SRC_NAMES	= main_bonus \
 				phi_parsing_setter_bonus \
 				phi_parsing_bonus\
 				phi_print_bonus \
+				phi_routine_action_bonus \
 				phi_routine_bonus \
+				phi_routine_loop_cond_bonus \
 				phi_utils_bonus
 
 

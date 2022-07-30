@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 23:01:23 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 20:35:01 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 17:39:11 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-/*
+
 static int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
@@ -25,9 +25,19 @@ static int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	return ((unsigned char)*(s1 + i) - (unsigned char)*(s2 + i));
 }
-*/
+
 void	log_print(t_philo *philo, int phi_num, long start, char *message)
 {
-	(void)philo;
-	printf("%li %d %s\n", timestamp(start), phi_num, message);
+	sem_wait(philo->log);
+	sem_wait(philo->end->mut);
+	if (!ft_strcmp(message, "is eating"))
+	{
+		sem_wait(philo->sem_last_meal);
+		philo->last_meal = timestamp(philo->start);
+		sem_post(philo->sem_last_meal);
+	}
+	if (!philo->end->value)
+		printf("%li %d %s\n", timestamp(start), phi_num, message);
+	sem_post(philo->log);
+	sem_post(philo->end->mut);
 }
