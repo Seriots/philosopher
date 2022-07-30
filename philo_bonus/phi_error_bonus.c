@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:04:56 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 21:07:39 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:14:24 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	phi_display_parsing_error(int key)
 		write(2, "Less than four arguments\n", 26);
 	else if (key == 3)
 		write(2, "Arguments must be positive numbers\n", 36);
-	write(2, "Usage: ./philo <numbers_of_philosophers> \
+	write(2, "Usage: ./philo_bonus <numbers_of_philosophers> \
 <time_to_die> <time_to_eat> <time_to_sleep> \
-[number_of_times_each_philosopher_must_eat]\n", 130);
+[number_of_times_each_philosopher_must_eat]\n", 136);
 }
 
 void	phi_display_error(int key)

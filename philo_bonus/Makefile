@@ -20,8 +20,8 @@ SRC_NAMES	= main_bonus \
 				phi_routine_action_bonus \
 				phi_routine_bonus \
 				phi_routine_loop_cond_bonus \
-				phi_utils_bonus
-
+				phi_utils_bonus \
+				phi_wait_thread_bonus
 
 OBJ_DIR		= obj
 

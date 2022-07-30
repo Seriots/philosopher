@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:41:42 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 18:20:54 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:06:27 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,13 @@ void	phi_sleep(t_philo *philo)
 	ts = philo->phi_const->time_to_sleep;
 	log_print(philo, philo->phi_number, philo->start, "is sleeping");
 	msleep(ts, timestamp(0));
+}
+
+void	phi_think(t_philo *philo)
+{
+	int	tt;
+
+	tt = philo->phi_const->time_to_eat;
+	log_print(philo, philo->phi_number, philo->start, "is thinking");
+	msleep(tt, timestamp(0));
 }

@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:10:17 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 18:54:48 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:16:21 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,9 @@
 
 #include <stdio.h>
 
-int	wait_all_thread(t_table *table)
-{
-	int	i;
-	int	error;
-	int	ret_val;
-
-	i = 0;
-	ret_val = 0;
-	while (i < table->phi_const.nb_philo && table->all_thread[i])
-	{
-		error = pthread_join(table->all_thread[i], 0);
-		if (error && ret_val == 0)
-			ret_val = error;
-		i++;
-	}
-	return (ret_val);
-}
-
 static int	check_all_nb_meal(t_table *table)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (table->phi_const.nb_repeat == -1)
@@ -43,7 +25,7 @@ static int	check_all_nb_meal(t_table *table)
 	while (i < table->phi_const.nb_philo)
 	{
 		sem_wait(table->sem_nb_meal);
-		if (table->all_philo[i].nb_of_meal < table->phi_const.nb_repeat)	
+		if (table->all_philo[i].nb_of_meal < table->phi_const.nb_repeat)
 			return (sem_post(table->sem_nb_meal), 0);
 		sem_post(table->sem_nb_meal);
 		i++;
@@ -54,7 +36,8 @@ static int	check_all_nb_meal(t_table *table)
 static int	main_end_cond(t_table *table)
 {
 	sem_wait(table->end.mut);
-	if (table->end.value == 1 || table->phi_const.nb_repeat == 0 || check_all_nb_meal(table))
+	if (table->end.value == 1 || table->phi_const.nb_repeat == 0
+		|| check_all_nb_meal(table))
 	{
 		table->end.value = 1;
 		return (sem_post(table->end.mut), 0);
@@ -78,7 +61,6 @@ static void	check_last_meal(t_table *table, int *breaker, int i, int td)
 	}
 	sem_post(table->sem_last_meal);
 }
-
 
 static void	check_death(t_table *table, int td, int nb_philo)
 {
@@ -117,7 +99,8 @@ int	main(int argc, char **argv)
 		return (thread_creation_error(&table, error));
 	while (main_end_cond(&table))
 	{
-		check_death(&table, table.phi_const.time_to_die, table.phi_const.nb_philo);
+		check_death(&table, table.phi_const.time_to_die,
+			table.phi_const.nb_philo);
 		msleep(1, timestamp(0));
 	}
 	wait_all_thread(&table);

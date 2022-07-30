@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:11:17 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 18:50:40 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:18:03 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_table
 	t_end		end;
 }				t_table;
 
-/*main.c*/
+/*phi_wait_thread.c*/
 int		wait_all_thread(t_table *table);
 
 /*phi_error.c*/
@@ -91,13 +91,14 @@ int		create_all_thread(pthread_t	*all_thread,
 /*phi_routine_action.c*/
 void	phi_sleep(t_philo *philo);
 void	phi_eat(t_philo *philo);
+void	phi_think(t_philo *philo);
 void	grab_fork(t_philo *philo);
 
 /*phi_routine_loop_cond.c*/
 int		run_loop(t_philo *philo);
 
 /*phi_routine.c*/
-void 	*routine(void *args);
+void	*routine(void *args);
 
 /*phi_utils.c*/
 void	msleep(long time, long start);

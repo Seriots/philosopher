@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_routine_loop_cond_bonus.c                      :+:      :+:    :+:   */
+/*   phi_wait_thread_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:57:31 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:27:28 by lgiband          ###   ########.fr       */
+/*   Created: 2022/07/30 19:16:07 by lgiband           #+#    #+#             */
+/*   Updated: 2022/07/30 19:23:34 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <pthread.h>
+
 #include "philosopher_bonus.h"
 
-int	run_loop(t_philo *philo)
+int	wait_all_thread(t_table *table)
 {
-	sem_wait(philo->end->mut);
-	if (philo->end->value || philo->phi_const->nb_repeat == 0)
-		return (sem_post(philo->end->mut), 0);
-	return (sem_post(philo->end->mut), 1);
+	int	i;
+	int	error;
+	int	ret_val;
+
+	i = 0;
+	ret_val = 0;
+	while (i < table->phi_const.nb_philo && table->all_thread[i])
+	{
+		error = pthread_join(table->all_thread[i], 0);
+		if (error && ret_val == 0)
+			ret_val = error;
+		i++;
+	}
+	return (ret_val);
 }
