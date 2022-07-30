@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:04:56 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:14:24 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:37:51 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void	phi_display_error(int key)
 
 int	thread_creation_error(t_table *table, int error)
 {
+	sem_wait(table->end.mut);
+	table->end.value = 1;
+	sem_post(table->end.mut);
 	wait_all_thread(table);
 	return (phi_display_error(error), free_table(table), 1);
 }

@@ -6,11 +6,13 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:27:32 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:26:32 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:30:35 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
+
+#include <unistd.h>
 
 void	*end_routine(t_philo *philo)
 {
@@ -25,6 +27,20 @@ void	*end_routine(t_philo *philo)
 		philo->nb_forks -= 1;
 	}
 	return (0);
+}
+
+void	*routine_solo(void *args)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)args;
+	if (run_loop(philo))
+		log_print(philo, philo->phi_number, philo->start, "is thinking");
+	if (run_loop(philo))
+		grab_fork(philo);
+	while (run_loop(philo))
+		usleep (300);
+	return (end_routine(philo));
 }
 
 void	*routine(void *args)

@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:11:17 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:18:03 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:35:19 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define END_SEM "end"
 # define MEAL_SEM "meal"
 # define NB_MEAL_SEM "nb_meal"
-# define WHO_SEM "who"
 
 typedef struct s_const
 {
@@ -74,7 +73,6 @@ int		thread_creation_error(t_table *table, int error);
 void	phi_display_error(int key);
 
 /*phi_free.c*/
-void	free_array(char **array, int size);
 void	unlink_sem(void);
 void	free_table(t_table *table);
 
@@ -98,6 +96,7 @@ void	grab_fork(t_philo *philo);
 int		run_loop(t_philo *philo);
 
 /*phi_routine.c*/
+void	*routine_solo(void *args);
 void	*routine(void *args);
 
 /*phi_utils.c*/

@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 20:09:07 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:27:13 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/07/30 19:35:10 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@
 static void	free_philo(t_philo *philo)
 {
 	free(philo);
-}
-
-void	free_array(char **array, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size && array[i])
-		free(array[i++]);
-	free(array);
 }
 
 void	unlink_sem(void)
