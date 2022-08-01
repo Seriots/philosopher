@@ -6,15 +6,18 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:41:42 by lgiband           #+#    #+#             */
-/*   Updated: 2022/08/01 15:04:10 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:19:42 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
 
+#include <stdio.h>
+
 void	grab_fork(t_philo *philo)
 {
 	sem_wait(philo->forks);
+	//printf("-%d-\n", sem_wait(philo->forks));
 	log_print(philo, philo->phi_number, philo->start, "has taken a fork");
 	philo->nb_forks += 1;
 }
