@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:11:17 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:35:19 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:02:20 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	*routine_solo(void *args);
 void	*routine(void *args);
 
 /*phi_utils.c*/
-void	msleep(long time, long start);
+void	msleep(long time, long start, t_philo *philo);
+void	msleep_main(long time, long start);
 long	timestamp(long start);
 
 /*phi_print.c*/

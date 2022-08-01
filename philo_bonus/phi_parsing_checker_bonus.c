@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 17:22:36 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 20:27:05 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 14:53:04 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_is_numbers(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (!check_is_number(argv[i]))
+		if (!argv[i][0] || !check_is_number(argv[i]))
 			return (3);
 		i++;
 	}

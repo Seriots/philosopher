@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:44:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:01:06 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:02:43 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,14 @@ static int	main_end_cond(t_table *table)
 
 static void	check_last_meal(t_table *table, int *breaker, int i, int td)
 {
+	int	is_die;
+
+	is_die = 0;
 	pthread_mutex_lock(&(table->all_philo[i].last_meal_mut));
 	if (timestamp(table->start) - table->all_philo[i].last_meal >= (long)td)
+		is_die = 1;
+	pthread_mutex_unlock(&(table->all_philo[i].last_meal_mut));
+	if (is_die)
 	{
 		pthread_mutex_lock(&(table->end.mut));
 		table->end.end = 1;
@@ -45,7 +51,6 @@ static void	check_last_meal(t_table *table, int *breaker, int i, int td)
 		pthread_mutex_unlock(&table->log);
 		*breaker = 1;
 	}
-	pthread_mutex_unlock(&(table->all_philo[i].last_meal_mut));
 }
 
 static void	check_death(t_table *table, int td, int nb_philo)
@@ -65,7 +70,7 @@ static void	check_death(t_table *table, int td, int nb_philo)
 		if (breaker)
 			break ;
 	}
-	msleep(1, timestamp(0));
+	msleep_main(1, timestamp(0));
 }
 
 int	wait_all_thread(t_table *table)

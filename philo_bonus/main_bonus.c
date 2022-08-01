@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:10:17 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:16:21 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:02:32 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	main(int argc, char **argv)
 	{
 		check_death(&table, table.phi_const.time_to_die,
 			table.phi_const.nb_philo);
-		msleep(1, timestamp(0));
+		msleep_main(1, timestamp(0));
 	}
 	wait_all_thread(&table);
 	free_table(&table);

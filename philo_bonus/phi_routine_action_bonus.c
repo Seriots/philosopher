@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:41:42 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 19:06:27 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:04:10 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	phi_eat(t_philo *philo)
 	sem_wait(philo->sem_nb_meal);
 	philo->nb_of_meal++;
 	sem_post(philo->sem_nb_meal);
-	msleep(te, timestamp(0));
+	msleep(te, timestamp(0), philo);
 	sem_post(philo->forks);
 	sem_post(philo->forks);
 	philo->nb_forks = 0;
@@ -40,7 +40,7 @@ void	phi_sleep(t_philo *philo)
 
 	ts = philo->phi_const->time_to_sleep;
 	log_print(philo, philo->phi_number, philo->start, "is sleeping");
-	msleep(ts, timestamp(0));
+	msleep(ts, timestamp(0), philo);
 }
 
 void	phi_think(t_philo *philo)
@@ -49,5 +49,5 @@ void	phi_think(t_philo *philo)
 
 	tt = philo->phi_const->time_to_eat;
 	log_print(philo, philo->phi_number, philo->start, "is thinking");
-	msleep(tt, timestamp(0));
+	msleep(tt, timestamp(0), philo);
 }

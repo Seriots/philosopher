@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:45:11 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 19:52:22 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:01:18 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	grab_right_fork(t_philo *philo);
 void	grab_left_fork(t_philo *philo);
 
 /*phi_utils.c*/
-void	msleep(long time, long start);
+void	msleep(long time, long start, t_philo *philo);
+void	msleep_main(long time, long start);
 long	timestamp(long start);
 
 /*phi_print.c*/

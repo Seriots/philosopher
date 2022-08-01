@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 18:28:30 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/28 19:56:04 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:03:29 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	*routine(void *args)
 	if (run_loop(philo))
 		log_print(philo, philo->phi_number, philo->start, "is thinking");
 	if (philo->phi_number % 2 == 1)
-		msleep(philo->phi_const->time_to_eat, timestamp(0));
+		msleep(philo->phi_const->time_to_eat, timestamp(0), philo);
 	while (run_loop(philo))
 	{
 		if (philo->phi_number % 2 == 1
 			&& philo->phi_number == philo->phi_const->nb_philo)
-			msleep(philo->phi_const->time_to_eat / 2, timestamp(0));
+			msleep(philo->phi_const->time_to_eat / 2, timestamp(0), philo);
 		if (run_loop(philo))
 			grab_left_fork(philo);
 		if (run_loop(philo))
