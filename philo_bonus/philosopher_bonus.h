@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:11:17 by lgiband           #+#    #+#             */
-/*   Updated: 2022/08/01 15:02:20 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:38:12 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <semaphore.h>
 # include <pthread.h>
 
-# define LOG_SEM "log"
-# define FORKS_SEM "forks"
-# define END_SEM "end"
-# define MEAL_SEM "meal"
-# define NB_MEAL_SEM "nb_meal"
+# define LOG_SEM "/log"
+# define FORKS_SEM "/forks"
+# define END_SEM "/end"
+# define MEAL_SEM "/meal"
+# define NB_MEAL_SEM "/nb_meal"
 
 typedef struct s_const
 {
