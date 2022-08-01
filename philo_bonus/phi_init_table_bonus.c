@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:52:00 by lgiband           #+#    #+#             */
-/*   Updated: 2022/07/30 18:50:00 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/01 04:08:58 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ int	init_table(t_table *table, int nb_philo)
 	if (!table->all_thread)
 		return (free(table->all_philo), 7);
 	memset(table->all_thread, 0, sizeof(pthread_t) * (nb_philo + 1));
-	return (error);
+	return (0);
 }

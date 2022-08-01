@@ -1,5 +1,5 @@
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra -g -pthread
+CFLAGS		= -Wall -Werror -Wextra -pthread
 MAKE		= /bin/make
 
 NAME		= philo_bonus
