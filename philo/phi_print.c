@@ -6,7 +6,7 @@
 /*   By: lgiband <lgiband@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 23:01:23 by lgiband           #+#    #+#             */
-/*   Updated: 2022/08/02 22:39:51 by lgiband          ###   ########.fr       */
+/*   Updated: 2022/08/03 18:55:11 by lgiband          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int	ft_strcmp(const char *s1, const char *s2)
 
 void	log_print(t_philo *philo, int phi_num, long start, char *message)
 {
+	pthread_mutex_lock(&(philo->last_meal_mut));
 	pthread_mutex_lock(philo->log);
 	pthread_mutex_lock(&(philo->end->mut));
-	pthread_mutex_lock(&(philo->last_meal_mut));
 	if (!ft_strcmp(message, "is eating"))
 		philo->last_meal = timestamp(philo->start);
 	if (!philo->end->end && !(timestamp(philo->start) - philo->last_meal
